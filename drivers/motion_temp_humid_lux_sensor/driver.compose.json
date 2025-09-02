@@ -1,0 +1,126 @@
+{
+  "id": "motion_temp_humid_lux_sensor",
+  "name": {
+    "en": "Motion Temperature Humidity Luminance Sensor"
+  },
+  "class": "sensor",
+  "platforms": ["local"],
+  "connectivity": ["zigbee"],
+  "capabilities": [
+    "alarm_motion",
+    "measure_temperature",
+    "measure_humidity",
+    "measure_luminance",
+    "measure_battery",
+    "alarm_battery"
+  ],
+  "capabilitiesOptions": {
+    "measure_temperature": {
+      "decimals": 1
+    },
+    "measure_humidity": {
+      "decimals": 1
+    }
+  },
+  "energy": {
+    "batteries": ["CR2450"]
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Temperature Settings"
+      },
+      "children": [
+        {
+          "id": "temperature_offset",
+          "type": "number",
+          "label": {
+            "en": "Temperature offset"
+          },
+          "hint": {
+            "en": "Adjust the temperature reading by this amount (°C)"
+          },
+          "value": 0,
+          "attr": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Humidity Settings"
+      },
+      "children": [
+        {
+          "id": "humidity_offset",
+          "type": "number",
+          "label": {
+            "en": "Humidity offset"
+          },
+          "hint": {
+            "en": "Adjust the humidity reading by this amount (%)"
+          },
+          "value": 0,
+          "attr": {
+            "min": -20,
+            "max": 20,
+            "step": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Battery Settings"
+      },
+      "children": [
+        {
+          "id": "batteryThreshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold"
+          },
+          "hint": {
+            "en": "Battery level below which the battery alarm will be triggered (%)"
+          },
+          "value": 20,
+          "attr": {
+            "min": 5,
+            "max": 50,
+            "step": 1
+          }
+        }
+      ]
+    }
+  ],
+  "zigbee": {
+    "manufacturerName": [
+      "_TZE200_rhgsbacq"
+    ],
+    "productId": [
+      "TS0601"
+    ],
+    "endpoints": {
+      "1": {
+        "clusters": [0, 61184],
+        "bindings": []
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/icon.svg",
+      "instruction": {
+        "en": "Press the reset button for approximately 5 seconds until the LED blinks."
+      }
+    }
+  }
+}

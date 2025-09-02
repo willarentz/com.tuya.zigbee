@@ -1,6 +1,6 @@
 {
   "id": "com.tuya.zigbee",
-  "version": "0.2.73",
+  "version": "0.2.74",
   "compatibility": ">=5.0.0",
   "platforms": [
     "local"
@@ -28,7 +28,7 @@
       "Samotech",
       "Silvercrest",
       "Smart9",
-      "Zemismart",      
+      "Zemismart",
       "Zigbee",
       "Woox",
       "Sensor",
