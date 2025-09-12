@@ -1,0 +1,77 @@
+{
+  "id": "rain_sensor_simple",
+  "name": {
+    "en": "Rain Sensor (Simple)",
+    "nl": "Regensensor (Eenvoudig)"
+  },
+  "class": "sensor",
+  "platforms": ["local"],
+  "connectivity": ["zigbee"],
+  "capabilities": [
+    "measure_battery",
+    "alarm_battery",
+    "alarm_water"
+  ],
+  "energy": {
+    "batteries": [
+      "INTERNAL"
+    ]
+  },
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Battery Settings"
+      },
+      "children": [
+        {
+          "id": "batteryThreshold",
+          "type": "number",
+          "label": {
+            "en": "Battery alarm threshold"
+          },
+          "hint": {
+            "en": "Battery level below which the battery alarm will be triggered (%)"
+          },
+          "value": 20,
+          "attr": {
+            "min": 5,
+            "max": 50,
+            "step": 1
+          }
+        }
+      ]
+    }
+  ],
+  "zigbee": {
+    "manufacturerName": [
+      "_TZ3000_otwpdq1d"
+    ],
+    "productId": [
+      "TS0207"
+    ],
+    "endpoints": {
+      "1": {
+        "clusters": [
+          1,
+          1280
+        ],
+        "bindings": [
+          1,
+          1280
+        ]
+      }
+    },
+    "learnmode": {
+      "image": "{{driverAssetsPath}}/icon.svg",
+      "instruction": {
+        "en": "Press and hold the button for approx. 5 seconds until the LED blinks green.",
+        "nl": "Houd de knop voor ongeveer 5 seconden ingedrukt totdat de LED groen knippert."
+      }
+    }
+  }
+}
