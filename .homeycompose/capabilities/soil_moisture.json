@@ -10,6 +10,7 @@
     },
     "getable": true,
     "setable": false,
+    "insights": true,
     "chartType": "area",
     "min": 0,
     "max": 100,
@@ -25,4 +26,3 @@
       }
     }
   }
-  

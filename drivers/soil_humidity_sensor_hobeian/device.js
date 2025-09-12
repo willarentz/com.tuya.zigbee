@@ -30,10 +30,10 @@ class SoilHumiditySensorHobeian extends TuyaSpecificClusterDevice {
     const dp = data.dp;
     const parsedValue = getDataValue(data);
     const dataType = data.datatype;
-    // this.log(`Processing DP ${dp}, Data Type: ${dataType}, Parsed Value:`, parsedValue);
+    this.log(`Processing DP ${dp}, Data Type: ${dataType}, Parsed Value:`, parsedValue);
 
     // Log all received data points for debugging
-    // this.log(`HOBEIAN ZG-303Z - Received DP ${dp} with value ${parsedValue} (datatype: ${dataType})`);
+    this.log(`HOBEIAN ZG-303Z - Received DP ${dp} with value ${parsedValue} (datatype: ${dataType})`);
 
     switch (dp) {
       case 3: // soil_moisture

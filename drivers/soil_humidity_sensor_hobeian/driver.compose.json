@@ -19,6 +19,14 @@
     "alarm_battery",
     "alarm_water"
   ],
+  "capabilitiesOptions": {
+    "measure_battery": {
+      "insights": false
+    },
+    "soil_moisture": {
+      "insights": true
+    }
+  },
   "images": {
     "large": "{{driverAssetsPath}}/images/large.png",
     "small": "{{driverAssetsPath}}/images/small.png"
