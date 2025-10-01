@@ -18,6 +18,30 @@ class smartplug extends ZigBeeDevice {
     this.minReportCurrent = this.getSetting('minReportCurrent') * 1000;
     this.minReportVoltage = this.getSetting('minReportVoltage') * 1000;
 
+    // Determine energy scaling factor for meter_power (kWh)
+    // Default assumes centi-kWh reporting (value * 0.01)
+    this.energyFactor = 0.01;
+    try {
+      const basicAttrs = await zclNode.endpoints[1].clusters.basic.readAttributes(['manufacturerName']);
+      this._manufacturerName = basicAttrs.manufacturerName;
+    } catch (e) {
+      this.log('Could not read manufacturerName', e);
+    }
+    try {
+      const { multiplier, divisor } = await zclNode.endpoints[1]
+        .clusters[CLUSTER.METERING.NAME]
+        .readAttributes(['multiplier', 'divisor']);
+      if (typeof multiplier === 'number' && typeof divisor === 'number' && divisor) {
+        this.energyFactor = multiplier / divisor;
+      }
+    } catch (e) {
+      // Not all Tuya devices expose these; keep default or override below
+    }
+    // Manufacturer-specific override for devices reporting Wh
+    if (this._manufacturerName === '_TZ3000_303avxxt') {
+      this.energyFactor = 0.001;
+    }
+
     if (!this.hasCapability('measure_current')) {
       await this.addCapability('measure_current').catch(this.error);;
     }
@@ -78,8 +102,8 @@ class smartplug extends ZigBeeDevice {
 
     // meter_power
     this.registerCapability('meter_power', CLUSTER.METERING, {
-      reportParser: value => (value * this.meteringOffset)/100.0,
-      getParser: value => (value * this.meteringOffset)/100.0,
+      reportParser: value => (value * this.meteringOffset) * this.energyFactor,
+      getParser: value => (value * this.meteringOffset) * this.energyFactor,
       getOpts: {
         getOnStart: true,
         pollInterval: 300000
